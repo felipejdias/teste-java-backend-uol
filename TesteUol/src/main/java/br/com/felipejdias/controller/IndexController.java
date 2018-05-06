@@ -1,4 +1,4 @@
-package br.com.felipejdias.app;
+package br.com.felipejdias.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.felipejdias.domain.CodinomesEntity;
 import br.com.felipejdias.domain.JogadoresEntity;
 import br.com.felipejdias.service.CodinomeService;
 import br.com.felipejdias.service.JogadoresService;
@@ -39,16 +38,21 @@ public class IndexController {
 	
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(JogadoresEntity jogadores) {
-		List<CodinomesEntity> codinomes = new ArrayList<CodinomesEntity>();
-		ModelAndView view = new ModelAndView("/cadastrarJogadores"); 
 		
-		codinomes.addAll(codinomeService.buscarTodos());
-
-		view.addObject("codinomes", codinomes);
+		ModelAndView view = new ModelAndView("/cadastrarJogadores"); 
 		view.addObject("jogadores", jogadores);
+		view.addObject("codinomes", codinomeService.buscarTodos());		
 		return view;
 	}
 	
+	@GetMapping("/cadastrarJogadores")
+	public ModelAndView cadastrar(ModelAndView mv, JogadoresEntity jogadores) {
+		mv.addObject("jogadores", jogadores);
+		mv.addObject("codinomes", codinomeService.buscarTodos());		
+		return mv;
+	}
+	
+
     @GetMapping("/editar/{codigo}")
     public ModelAndView editar(@PathVariable("codigo") Long id) {
         return cadastrar(jogadoresService.buscarPorId(id));
@@ -65,11 +69,20 @@ public class IndexController {
 
         if(result.hasErrors()) {
             return cadastrar(jogador);
+        }else {
+        	boolean codinomeDisponivel = jogadoresService.verificaCodinomeDisponivel(jogador.getCdCodinome().getCdCodinome());
+        	if(codinomeDisponivel) {
+        		 jogadoresService.salvar(jogador);
+        		 return index();
+        	}else {
+        		ModelAndView mv = new ModelAndView("/cadastrarJogadores");
+        		mv.addObject("message", "Codinome indisponível. Por favor escolha outro.");
+        		return cadastrar(mv, jogador);
+        	}
+        		
         }
-         
-        jogadoresService.salvar(jogador);
-     
-        return index();
+              
+        
     }
 
 }

@@ -1,5 +1,6 @@
 package br.com.felipejdias.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,29 +14,36 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "TB_JOGADORES")
+@Table(name = "TB_JOGADORES", uniqueConstraints={@UniqueConstraint(columnNames={"CD_CODINOME"})})
 @EntityListeners(AuditingEntityListener.class)
-public class JogadoresEntity {
+public class JogadoresEntity implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CD_JOGADOR")
 	private long cdJogador;
 	
-	@NotNull
-	@Column(name = "NM_JOGADOR")
+	
+	@Column(name = "NM_JOGADOR", nullable = false, length = 150)
+	@NotNull(message = "Autor é uma informação obrigatória.")
+	@NotBlank(message = "Autor é uma informação obrigatória.")
 	private String nmJogador;
 	
-	@NotNull
 	@Column(name = "DS_EMAIL")
+    @NotNull(message="Insera um e-mail váliado")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Email address is invalid")
 	private String dsEmail;
 	
 	@Column(name = "NR_TELEFONE")

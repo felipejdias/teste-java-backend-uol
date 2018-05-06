@@ -23,7 +23,8 @@ public class CodinomeService {
 		codinomes.saveAll(listaCodinomes);
 	}
 	
-	public Optional<CodinomesEntity> buscarPorId(long id) {
-		return codinomes.findById(id);
+	public CodinomesEntity buscarPorId(long id) {
+		Optional<CodinomesEntity> op = codinomes.findById(id);
+		return op.get();
 	}
 }

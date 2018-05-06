@@ -7,23 +7,41 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width" />
 
-<link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link href="../../css/bootstrap.min.css" rel="stylesheet"></link>
+	<link href="../../css/main.css" rel="stylesheet"></link>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/bootstrap.min.js"></script>
 	
-<link rel="stylesheet" th:href="@{../static/css/main.css}"
-	href="../static/css/main.css" />
 </head>
+<script>
+	$(document).ready(function() {
+		$('#inNmJogador').on('input', function() {
+			var input=$(this);
+			var is_name=input.val();
+			if(is_name){input.removeClass("invalid").addClass("valid");}
+			else{input.removeClass("valid").addClass("invalid");}
+		});
+		$('#inDsEmail').on('input', function() {
+			var input=$(this);
+			var is_name=input.val();
+			if(is_name){input.removeClass("invalid").addClass("valid");}
+			else{input.removeClass("valid").addClass("invalid");}
+		});
+
+	});
+	
+</script>	
 <body>
 
 	<nav class="navbar navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Aplicação UOL</a>
+				<a class="navbar-brand" href="/">Aplicação UOL</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/cadastrar">Cadastro</a></li>
+					<li><a  th:href="@{/cadastrar/}">Cadastro</a></li>
 				</ul>
 			</div>
 		</div>
@@ -31,54 +49,62 @@
 	
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form class="form-horizontal" th:object="${jogadores}"
-				th:action="@{/salvar}" method="POST" style="margin: 10px">
+			<form id="frmCadastroJogadores" class="form-horizontal" th:object="${jogadores}"
+				th:action="@{/salvar}" method="POST" style="margin: 10px" >
 				<div class="form-group">
 					<fieldset>
-						<div class="form-group row">
-							<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-								<div th:each="detailedError : ${#fields.detailedErrors()}">
-									<span th:text="Falha ao salvar registro."></span>
-								</div>
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-md-4"
-								th:classappend="${#fields.hasErrors('nmJogador')}? 'has-error'">
-								<label>Jogador</label> <input type="text"
-									class="form-control input-sm" th:field="*{nmJogador}"
-									autofocus="autofocus" placeholder="Insira o nome do Jogador"
-									maxlength="50" />
-							</div>
-						</div>
+                        <div class="form-group row">
+                            <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                                <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                    <span th:text="${detailedError.message}"></span>
+                                </div>
+                            </div>
+                        </div>
+                      	<div class="form-group row">
+						    <div class="col-md-1">
+						        <input  style="display:none;" type="text" class="form-control input-sm" id="id" 
+						        th:field="*{cdJogador}" readOnly="readonly"/>
+						    </div>
+						 </div>
+                        <div class="form-group row">
+                        	<div class="col-md-4">                                                   
+                                <label>Jogador</label>
+                                <input id="inNmJogador" type="text" class="form-control input-sm" th:field="*{nmJogador}" 
+                                autofocus="autofocus" placeholder="Informe jogador" maxlength="50" required=''/>
+                                <span class="error">Campo obrigatório</span>                        
+                        	</div>
+                        </div>
 						<div class="form-group row">
 							<div class="col-md-4"
 								th:classappend="${#fields.hasErrors('dsEmail')}? 'has-error'">
-								<label>Email</label> <input type="email"
+								<label>Email</label> 
+								<input type="email" id="inDsEmail"
 									class="form-control input-sm" th:field="*{dsEmail}"
-									maxlength="150" placeholder="Informe o email do jogador" />
+									maxlength="150" placeholder="Informe o email do jogador" required=''/>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-md-2"
 								th:classappend="${#fields.hasErrors('nrTelefone')}? 'has-error'">
-								<label>Número de Telefone</label> <input type="tel"
-									class="form-control input-sm" th:field="*{nrTelefone}" />
+								<label>Número de Telefone</label> 
+								<input type="tel" id="inNrTelefone" class="form-control phone-mask" th:field="*{nrTelefone}" />
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-md-4">
 								<label>Codinome</label> 
 								<select id="codinomes" class="form-control input-sm" th:field="*{cdCodinome}">
-									<option th:each="codinome : ${codinomes}"
+								   <option value="">Selecione o codinome</option>
+									<option id="opCodinome" th:each="codinome : ${codinomes}"
 										th:value="${codinome.cdCodinome}"
 										th:text="|${codinome.nmGrupo} : ${codinome.nmCodinome}|"></option>
 								</select>
+								<span class="error_show" th:text="${message}">The error message</span>
 							</div>
 						</div>
 					</fieldset>
 				</div>
-				<div class="form-group row">
+				<div class="form-group row" id="btnSalvar">
 					<button type="submit" class="btn btn-sm btn-primary">Salvar</button>
 					<a th:href="@{/}" class="btn btn-sm btn-default">Cancelar</a>
 				</div>
