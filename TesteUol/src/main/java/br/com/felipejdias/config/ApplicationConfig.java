@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import br.com.felipejdias.domain.CodinomesEntity;
 import br.com.felipejdias.reader.ArquivoCodinome;
@@ -30,10 +31,12 @@ public class ApplicationConfig {
 
 	@Autowired
 	private CodinomeService CodinomeService;
+	
+    @Autowired
+    private SpringTemplateEngine templateEngine;
     
     @PostConstruct
-    public void init(){	
-		
+    public void init(){			
 		try {
 			for (String codinome : arquivoService.getLigaJustica().getCodinomes().getCodinome()) {
 				this.codinome = new CodinomesEntity();
