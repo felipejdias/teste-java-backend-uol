@@ -19,3 +19,7 @@ Com h2database, spring-boot-starter-thymeleaf, spring-boot-starter-data-jpa
 
 	mvn spring-boot:run
 	
+	Acessar a URL: http://localhost:8099/
+	
+
+	

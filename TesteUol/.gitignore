@@ -3,3 +3,5 @@
 target/
 log/
 .settings/
+/log.txt
+/LOGDEBUG.txt
