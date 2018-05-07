@@ -21,5 +21,15 @@ Com h2database, spring-boot-starter-thymeleaf, spring-boot-starter-data-jpa
 	
 	Acessar a URL: http://localhost:8099/
 	
+- Ou se preferir também é possível executar a aplicação compilando e executando jar. Necessário Java 8 e Apache Maven 3 instalados e rodar os comandos abaixo no diretório raiz do projeto:
+
+	mvn clean package
+	
+	java -jar target\TesteUol-1.0.0-SNAPSHOT.jar
+	
+## Troubleshooting
+
+-Caso necessário é possível alterar a porta em que aplicação/banco de dados subirá. Para isto deve-se alterar a propriedade server.port no arquivo src/main/resources/application.properties para uma porta válida e que não esteja sendo usda por outro processo.
+
 
 	

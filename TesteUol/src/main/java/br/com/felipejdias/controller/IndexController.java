@@ -32,7 +32,7 @@ public class IndexController {
 	public ModelAndView index() {
 		List<JogadoresEntity> jogadores = new ArrayList<JogadoresEntity>();
 		
-		ModelAndView view = new ModelAndView("/index"); 
+		ModelAndView view = new ModelAndView("index"); 
 		jogadores.addAll(jogadoresService.buscarTodos());
 		view.addObject("jogadores", jogadores);
 		return view;
