@@ -5,6 +5,17 @@ import org.springframework.stereotype.Repository;
 
 import br.com.felipejdias.domain.CodinomesEntity;
 
+/**
+ * Classe {@link Repository} que estende a JpaRepository que será implementada e executada pelo spring framework expondo
+ *
+ * 
+ * @author Felipe Jaconis
+ * 
+ * @see 
+ * 
+ * {@link JpaRepository}
+ * 
+ */
 @Repository
 public interface CodinomesRepository extends JpaRepository<CodinomesEntity, Long>{
 

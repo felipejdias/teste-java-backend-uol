@@ -6,6 +6,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Classe gerada automaticamente a partir do XSD liga_da_justica.xsd que representa o layout do
+ * arquivo .xml a ser consumido.
+ * 
+ *  
+ * @author Felipe Jaconis 
+ * 
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "codinomes"

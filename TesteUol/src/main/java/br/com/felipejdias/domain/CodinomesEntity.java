@@ -20,6 +20,18 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+
+/**
+ * Entidade JPA que representa a tablea de codinomes
+ * 
+ *  
+ * @author Felipe Jaconis
+ * 
+ * @see 
+ * 
+ * {@link Entity}
+ * 
+ */
 @Entity
 @Table(name = "TB_CODINOMES", uniqueConstraints={@UniqueConstraint(columnNames={"NM_CODINOME", "CD_GRUPO"})})
 @EntityListeners(AuditingEntityListener.class)

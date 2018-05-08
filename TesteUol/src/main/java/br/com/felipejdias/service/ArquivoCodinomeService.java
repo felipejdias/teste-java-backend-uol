@@ -21,6 +21,15 @@ import br.com.felipejdias.reader.ArquivoCodinome;
 import br.com.felipejdias.stubs.LigaDaJustica;
 import br.com.felipejdias.stubs.Vingadores;
 
+/**
+ * Implementação da {@link ArquivoCodinome} criada para consumir os arquivos XML e JSON e
+ * mapear os atributos para os respectivos POJOS {@link Vaingadores} e @{Link LigaDaJustica} .
+ * 
+ *  
+ * @author Felipe Jaconis
+ * 
+ * 
+ */
 @Service
 public class ArquivoCodinomeService implements ArquivoCodinome {
 	
@@ -28,16 +37,41 @@ public class ArquivoCodinomeService implements ArquivoCodinome {
 	private static final String ENDERECO_ARQUIVO_JSON = "arquivo.vingadores";
 	private static final String JSON_ENCODING_DEFAULT = "UTF-8";
 	
+	/**
+	 * Instancia um novo objeto do tipo <strong>Environment</strong> a ser gerenciado pelo spring framework. 
+	 * 
+	 * @see 
+	 * 
+	 * {@link Environment}
+	 * 
+	 */
 	@Autowired
 	private Environment env;
 
+	
+	/**
+	 * Consome e faz o unmarshal do arquivo XML para o POJO {@link LigaDaJustica} utilizando o framework JAXB
+	 * 
+	 * @see 
+	 * 
+	 * {@link JAXB#unmarshal}
+	 * 
+	 */
 	@Override
 	public LigaDaJustica getLigaJustica() throws JAXBException, IOException {
 		URL url = new URL(env.getProperty(ENDERECO_ARQUIVO_XML));
 		LigaDaJustica ligaJustica = JAXB.unmarshal(url, LigaDaJustica.class);
 		return ligaJustica;
 	}
-
+	
+	/**
+	 * Consome e faz o parse do arquivo JSON para o POJO {@link Vingadores} utilizando o framework {@link Gson }
+	 * 
+	 * @see 
+	 * 
+	 * {@link Gson#fromJson}
+	 * 
+	 */
 	@Override
 	public Vingadores getVingadores() throws IOException {
 		URL url = new URL(env.getProperty(ENDERECO_ARQUIVO_JSON));
@@ -52,6 +86,14 @@ public class ArquivoCodinomeService implements ArquivoCodinome {
 		return vingadores;
 	}
 
+	/**
+	 * Converte de @{link Reader} para String a para facilitar a leitura do arquivo JSON
+	 * 
+	 * @see 
+	 * 
+	 * {@link Reader}
+	 * 
+	 */
 	private String convertJsonToText(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;

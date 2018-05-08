@@ -5,6 +5,13 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Classe gerada automaticamente que representa um POJO do arquivo JSON vingadores.json
+ * 
+ * 
+ * @author Felipe Jaconis 
+ * 
+ */
 public class Vingadores {
 
 	@SerializedName("vingadores")

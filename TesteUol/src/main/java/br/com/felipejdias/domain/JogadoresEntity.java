@@ -23,6 +23,17 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * Entidade JPA que representa a tablea de jogadores
+ * 
+ *  
+ * @author Felipe Jaconis
+ * 
+ * @see 
+ * 
+ * {@link Entity}
+ * 
+ */
 @Entity
 @Table(name = "TB_JOGADORES", uniqueConstraints={@UniqueConstraint(columnNames={"CD_CODINOME"})})
 @EntityListeners(AuditingEntityListener.class)
@@ -47,7 +58,7 @@ public class JogadoresEntity implements Serializable {
 	private String dsEmail;
 	
 	@Column(name = "NR_TELEFONE", nullable = true)
-	private long nrTelefone;
+	private String nrTelefone;
 	
 	@OneToOne
 	@JoinColumn(name = "CD_CODINOME")
@@ -89,11 +100,11 @@ public class JogadoresEntity implements Serializable {
 		this.dsEmail = dsEmail;
 	}
 
-	public long getNrTelefone() {
+	public String getNrTelefone() {
 		return nrTelefone;
 	}
 
-	public void setNrTelefone(long nrTelefone) {
+	public void setNrTelefone(String nrTelefone) {
 		this.nrTelefone = nrTelefone;
 	}
 

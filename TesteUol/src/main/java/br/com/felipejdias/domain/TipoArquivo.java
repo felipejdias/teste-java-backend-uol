@@ -2,6 +2,13 @@ package br.com.felipejdias.domain;
 
 import org.springframework.util.StringUtils;
 
+/**
+ * Classe Enum responsável por representar um tipo de arquivo podendo ser Vingadores ou Liga da Justiça.
+ *  
+ * @author Felipe Jaconis
+ * 
+ *  
+ */
 public enum TipoArquivo {
 	
 	VINGADORES(1L, "Os Vingadores"),
