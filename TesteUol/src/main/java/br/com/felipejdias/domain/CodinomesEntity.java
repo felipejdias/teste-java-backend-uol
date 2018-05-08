@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "TB_CODINOMES", uniqueConstraints={@UniqueConstraint(columnNames={"NM_CODINOME", "NM_GRUPO"})})
+@Table(name = "TB_CODINOMES", uniqueConstraints={@UniqueConstraint(columnNames={"NM_CODINOME", "CD_GRUPO"})})
 @EntityListeners(AuditingEntityListener.class)
 public class CodinomesEntity implements Serializable{
 	
@@ -36,8 +37,9 @@ public class CodinomesEntity implements Serializable{
   	private String nmCodinome;
 	
 	@NotNull
-	@Column(name = "NM_GRUPO")
-	private String nmGrupo;
+	@Enumerated
+	@Column(name = "CD_GRUPO")
+	private TipoArquivo cdGrupo;
 	
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -65,12 +67,12 @@ public class CodinomesEntity implements Serializable{
 		this.nmCodinome = nmCodinome;
 	}
 
-	public String getNmGrupo() {
-		return nmGrupo;
+	public TipoArquivo getCdGrupo() {
+		return cdGrupo;
 	}
 
-	public void setNmGrupo(String nmGrupo) {
-		this.nmGrupo = nmGrupo;
+	public void setCdGrupo(TipoArquivo cdGrupo) {
+		this.cdGrupo = cdGrupo;
 	}
 
 	public Date getDtInclusao() {

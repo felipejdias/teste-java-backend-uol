@@ -2,6 +2,7 @@ package br.com.felipejdias.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -15,15 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.felipejdias.domain.CodinomesDisponiveis;
+import br.com.felipejdias.domain.CodinomesEntity;
 import br.com.felipejdias.domain.JogadoresEntity;
-import br.com.felipejdias.service.CodinomeService;
+import br.com.felipejdias.domain.TipoArquivo;
 import br.com.felipejdias.service.JogadoresService;
 
 @Controller
 public class IndexController {
-	
-	@Autowired
-	private CodinomeService codinomeService;
 	
 	@Autowired
 	private JogadoresService jogadoresService;
@@ -32,7 +32,7 @@ public class IndexController {
 	public ModelAndView index() {
 		List<JogadoresEntity> jogadores = new ArrayList<JogadoresEntity>();
 		
-		ModelAndView view = new ModelAndView("/index"); 
+		ModelAndView view = new ModelAndView("index"); 
 		jogadores.addAll(jogadoresService.buscarTodos());
 		view.addObject("jogadores", jogadores);
 		return view;
@@ -43,14 +43,14 @@ public class IndexController {
 		
 		ModelAndView view = new ModelAndView("cadastrarJogadores"); 
 		view.addObject("jogadores", jogadores);
-		view.addObject("codinomes", codinomeService.buscarTodos());		
+		view.addObject("tipoArquivos", TipoArquivo.values());		
 		return view;
 	}
 	
 	@GetMapping("/cadastrarJogadores")
 	public ModelAndView cadastrar(ModelAndView mv, JogadoresEntity jogadores) {
 		mv.addObject("jogadores", jogadores);
-		mv.addObject("codinomes", codinomeService.buscarTodos());		
+		mv.addObject("tipoArquivos", TipoArquivo.values());		
 		return mv;
 	}
 	
@@ -72,8 +72,9 @@ public class IndexController {
         if(result.hasErrors()) {
             return cadastrar(jogador);
         }else {
-        	boolean codinomeDisponivel = jogadoresService.verificaCodinomeDisponivel(jogador.getCdCodinome().getCdCodinome());
-        	if(codinomeDisponivel) {
+        	List<CodinomesDisponiveis> codinomesDisponiveis = jogadoresService.verificaCodinomeDisponivel(jogador.getArquivoSelecionado());
+        	if(!codinomesDisponiveis.isEmpty()) {
+        		jogador.setCdCodinome(preencheCodinome(codinomesDisponiveis));
         		 jogadoresService.salvar(jogador);
         		 return index();
         	}else {
@@ -83,8 +84,22 @@ public class IndexController {
         	}
         		
         }
-              
         
     }
-
+    
+    public CodinomesEntity preencheCodinome(List<CodinomesDisponiveis> codinomesDisponiveis) {
+    	Random randomGenerator = new Random();
+    	
+    	int index = randomGenerator.nextInt(codinomesDisponiveis.size());  
+    	
+    	CodinomesEntity codinome = new CodinomesEntity();
+    	codinome.setCdCodinome(codinomesDisponiveis.get(index).getCdCodinome());
+    	codinome.setCdGrupo(codinomesDisponiveis.get(index).getCdGrupo());
+    	codinome.setNmCodinome(codinomesDisponiveis.get(index).getNmCodinome());
+    	
+    	return codinome;
+    }
+    
+    
+ 
 }

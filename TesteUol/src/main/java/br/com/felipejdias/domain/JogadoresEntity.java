@@ -37,8 +37,8 @@ public class JogadoresEntity implements Serializable {
 	
 	
 	@Column(name = "NM_JOGADOR", nullable = false, length = 150)
-	@NotNull(message = "Autor é uma informação obrigatória.")
-	@NotBlank(message = "Autor é uma informação obrigatória.")
+	@NotNull
+	@NotBlank
 	private String nmJogador;
 	
 	@Column(name = "DS_EMAIL")
@@ -46,10 +46,9 @@ public class JogadoresEntity implements Serializable {
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Email address is invalid")
 	private String dsEmail;
 	
-	@Column(name = "NR_TELEFONE")
+	@Column(name = "NR_TELEFONE", nullable = true)
 	private long nrTelefone;
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "CD_CODINOME")
 	private CodinomesEntity cdCodinome;
@@ -64,7 +63,8 @@ public class JogadoresEntity implements Serializable {
     @LastModifiedDate
 	private Date dtAlteracao;
     
-
+    private TipoArquivo arquivoSelecionado;
+        
 	public long getCdJogador() {
 		return cdJogador;
 	}
@@ -119,6 +119,14 @@ public class JogadoresEntity implements Serializable {
 
 	public void setDtAlteracao(Date dtAlteracao) {
 		this.dtAlteracao = dtAlteracao;
+	}
+
+	public TipoArquivo getArquivoSelecionado() {
+		return arquivoSelecionado;
+	}
+
+	public void setArquivoSelecionado(TipoArquivo arquivoSelecionado) {
+		this.arquivoSelecionado = arquivoSelecionado;
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.com.felipejdias.domain.CodinomesEntity;
 import br.com.felipejdias.domain.JogadoresEntity;
+import br.com.felipejdias.domain.TipoArquivo;
 import br.com.felipejdias.service.JogadoresService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,7 +30,7 @@ public class ValidaJogadores {
 		
 		codinome.setCdCodinome(1l);
 		codinome.setNmCodinome("Cyborg");
-		codinome.setNmGrupo("Liga da Justiça");
+		codinome.setCdGrupo(TipoArquivo.LIGA_DA_JUSTIÇA);
 		
 		
 		jogador1.setNmJogador("Felipe");

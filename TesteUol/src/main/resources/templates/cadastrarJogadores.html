@@ -53,13 +53,6 @@
 				th:action="@{/salvar}" method="POST" style="margin: 10px" >
 				<div class="form-group">
 					<fieldset>
-                        <div class="form-group row">
-                            <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-                                <div th:each="detailedError : ${#fields.detailedErrors()}">
-                                    <span th:text="${detailedError.message}"></span>
-                                </div>
-                            </div>
-                        </div>
                       	<div class="form-group row">
 						    <div class="col-md-1">
 						        <input  style="display:none;" type="text" class="form-control input-sm" id="id" 
@@ -75,8 +68,7 @@
                         	</div>
                         </div>
 						<div class="form-group row">
-							<div class="col-md-4"
-								th:classappend="${#fields.hasErrors('dsEmail')}? 'has-error'">
+							<div class="col-md-4">
 								<label>Email</label> 
 								<input type="email" id="inDsEmail"
 									class="form-control input-sm" th:field="*{dsEmail}"
@@ -84,21 +76,18 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<div class="col-md-2"
-								th:classappend="${#fields.hasErrors('nrTelefone')}? 'has-error'">
+							<div class="col-md-2">
 								<label>Número de Telefone</label> 
-								<input type="tel" id="inNrTelefone" class="form-control phone-mask" th:field="*{nrTelefone}" />
+								<input type="text" id="inNrTelefone" class="form-control phone-mask" th:field="*{nrTelefone}" />
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-md-4">
-								<label>Codinome</label> 
-								<select id="codinomes" class="form-control input-sm" th:field="*{cdCodinome}">
-								   <option value="">Selecione o codinome</option>
-									<option id="opCodinome" th:each="codinome : ${codinomes}"
-										th:value="${codinome.cdCodinome}"
-										th:text="|${codinome.nmGrupo} : ${codinome.nmCodinome}|"></option>
-								</select>
+								<label>Quero ser do grupo</label> 
+								<div th:each="tipoArquivo : ${tipoArquivos}" > 
+								    <input type="radio" th:id="${{tipoArquivo}}" th:value="${{tipoArquivo}}" th:field="*{arquivoSelecionado}" />
+								    <label th:for="${tipoArquivo}" th:text="${tipoArquivo.valor}" ></label>
+								</div>
 								<span class="error_show" th:text="${message}">The error message</span>
 							</div>
 						</div>
