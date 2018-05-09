@@ -22,14 +22,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
 /**
- * Entidade JPA que representa a tablea de codinomes
+ * 
+ * Entidade JPA que representa a tablea de jogadores.
+ * 
+ * Esta tabela será criada automaticamente pelo framework do spring e os dados serão persistidos utilizando Repository do JPA.
  * 
  *  
  * @author Felipe Jaconis
  * 
- * @see 
- * 
- * {@link Entity}
  * 
  */
 @Entity

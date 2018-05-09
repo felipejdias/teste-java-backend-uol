@@ -24,10 +24,14 @@ import br.com.felipejdias.service.JogadoresService;
 
 /**
  * 
- * Classe Controller da camada de apresentação contendo os métodos responsáveis por receber uma requisição GET
- * trata-las e atribuir valores na {@link ModelAndView}.
+ * Classe Controller da camada de apresentação contendo os métodos responsáveis por receber uma requisição GET ou POST
+ * trata-las e atribuir valores nas respectivas {@link ModelAndView}.
  * 
  * @author Felipe Jaconis
+ * 
+ * @see Controller
+ * @see RequestMapping
+ * @see GetMapping
  * 
  */
 @Controller

@@ -18,7 +18,7 @@ import br.com.felipejdias.stubs.Vingadores;
 public interface ArquivoCodinome {
 	
 	/**
-	 * Método responsável por realizar o GET da URL e realizar o set no objeto @{ling LigaDaJustica}
+	 * Realiza o GET da URL e o set no objeto @{link LigaDaJustica}
 	 * 
 	 *  
 	 * @return {@link LigaDaJustica} 
@@ -27,7 +27,7 @@ public interface ArquivoCodinome {
 	public LigaDaJustica getLigaJustica() throws JAXBException, IOException ;
 	
 	/**
-	 * Método responsável por realizar o GET da URL e realizar o set no objeto @{ling LigaDaJustica}
+	 * Realiza o GET da URL e realizar o set no objeto @{link LigaDaJustica}
 	 * 
 	 *  
 	 * @return {@link Vingadores} 

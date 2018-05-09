@@ -12,7 +12,7 @@ import br.com.felipejdias.repository.CodinomesRepository;
 /**
  * 
  * Classe Serviço que expõe os métodos configurados no objeto {@link CodinomesRepository} que acessam o dado da entidade {@link CodinomesEntity}
- * criados automaticamente pelo spring framework
+ * implementados automaticamente pelo spring framework.
  * 
  * @author Felipe Jaconis
  * 

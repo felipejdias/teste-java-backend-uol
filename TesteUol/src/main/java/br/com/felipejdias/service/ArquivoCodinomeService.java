@@ -23,11 +23,13 @@ import br.com.felipejdias.stubs.Vingadores;
 
 /**
  * Implementação da {@link ArquivoCodinome} criada para consumir os arquivos XML e JSON e
- * mapear os atributos para os respectivos POJOS {@link Vaingadores} e @{Link LigaDaJustica} .
+ * mapear os atributos para os respectivos POJOS {@link Vaingadores} e @{link LigaDaJustica} .
  * 
  *  
  * @author Felipe Jaconis
  * 
+ * @see Gson
+ * @see JAXB
  * 
  */
 @Service
@@ -38,11 +40,11 @@ public class ArquivoCodinomeService implements ArquivoCodinome {
 	private static final String JSON_ENCODING_DEFAULT = "UTF-8";
 	
 	/**
-	 * Instancia um novo objeto do tipo <strong>Environment</strong> a ser gerenciado pelo spring framework. 
+	 * Instancia um novo objeto do tipo <strong>Environment</strong> seu ciclo de vida 
+	 * será gerenciado pelo spring framework. 
 	 * 
-	 * @see 
-	 * 
-	 * {@link Environment}
+	 * @see Environment
+	 * @see Autowired
 	 * 
 	 */
 	@Autowired
@@ -52,9 +54,8 @@ public class ArquivoCodinomeService implements ArquivoCodinome {
 	/**
 	 * Consome e faz o unmarshal do arquivo XML para o POJO {@link LigaDaJustica} utilizando o framework JAXB
 	 * 
-	 * @see 
+	 * @see JAXB#unmarshal
 	 * 
-	 * {@link JAXB#unmarshal}
 	 * 
 	 */
 	@Override
@@ -67,9 +68,8 @@ public class ArquivoCodinomeService implements ArquivoCodinome {
 	/**
 	 * Consome e faz o parse do arquivo JSON para o POJO {@link Vingadores} utilizando o framework {@link Gson }
 	 * 
-	 * @see 
+	 * @see Gson#fromJson
 	 * 
-	 * {@link Gson#fromJson}
 	 * 
 	 */
 	@Override
@@ -89,9 +89,8 @@ public class ArquivoCodinomeService implements ArquivoCodinome {
 	/**
 	 * Converte de @{link Reader} para String a para facilitar a leitura do arquivo JSON
 	 * 
-	 * @see 
+	 * @see Reader
 	 * 
-	 * {@link Reader}
 	 * 
 	 */
 	private String convertJsonToText(Reader rd) throws IOException {

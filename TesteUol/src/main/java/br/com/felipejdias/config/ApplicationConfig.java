@@ -20,10 +20,14 @@ import br.com.felipejdias.stubs.Codinome;
 
 /**
  * 
- * Classe de configuração responsável por fazer consumir as URLs contendo os arquivos remotos XML e JSON e armezenar 
- * no banco de dados durante a inicilização do projeto spring boot.
+ * Classe de configuração responsável por fazer consumir as URLs contendo os arquivos remotos (XML e JSON) e persistir 
+ * no banco de dados. Esta configuração será executada de forma automática durante a inicialização do Spring Boot.
  * 
  * @author Felipe Jaconis
+ * 
+ * @see PostConstruct
+ * @see Component
+ * 
  * 
  */
 @Component
@@ -42,14 +46,12 @@ public class ApplicationConfig {
 	private CodinomeService CodinomeService;
     
 	/**
-	 * Método responsável por realizar a leitura dos arquivos remotos por meio 
-	 *  URLs e persisitir no banco de dados os dados em memória H2Database.
+	 * 	Realiza a leitura dos arquivos remotos por meio 
+	 *  URLs e persiste no banco de dados os dados em memória H2Database.
 	 * 
 	 *  Este Método utiliza a anotação <strong>@PostConstruct</strong> que é executado após a  construção 
-	 *  do projeto spring boot pelo próprio framework.
-	 * 
+	 *  do projeto pelo spring framework.
 	 *  
-	 * @throws {@link JAXBException}, {lkink IOException}
 	 */
     @PostConstruct
     public void init() throws JAXBException, IOException{			

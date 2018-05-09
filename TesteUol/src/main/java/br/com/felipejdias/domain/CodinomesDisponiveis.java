@@ -3,14 +3,13 @@ package br.com.felipejdias.domain;
 import br.com.felipejdias.repository.JogadoresRepository;
 
 /**
- * Classe utilizada @{link JogadoresRepository} para mapear os resultados da query utilizada para verifica codinomes disponíveis. 
+ * Classe utilizada por {@link JogadoresRepository} para mapear os resultados da query que verifica codinomes disponíveis. 
  * 
  *  
  * @author Felipe Jaconis
  * 
- * @see 
- * 
- * {@link org.springframework.data.jpa.repository.Query}
+ * @see JogadoresRepository
+ *  
  * 
  */
 public class CodinomesDisponiveis {
@@ -21,7 +20,7 @@ public class CodinomesDisponiveis {
 	
 	
 	/**
-	 * Construtur padrão utilizado para mapear o resultado da query configurada em {@link JogadoresRepository#verificaCodinomeDisponivel}
+	 * Construtur padrão utilizado para mapear o resultado da query configurada em {@link JogadoresRepository#verificaCodinomeDisponivel(TipoArquivo)}
 	 * 
 	 */
 	public CodinomesDisponiveis(long cdCodinome, String nmCodinome, TipoArquivo tipoArquivo) {

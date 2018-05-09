@@ -3,7 +3,8 @@ package br.com.felipejdias.domain;
 import org.springframework.util.StringUtils;
 
 /**
- * Classe Enum responsável por representar um tipo de arquivo podendo ser Vingadores ou Liga da Justiça.
+ * Classe Enum responsável por abstrair um tipo de arquivo selecionável na camada de apresentação
+ * podendo estes serem Vingadores ou Liga da Justiça.
  *  
  * @author Felipe Jaconis
  * 
@@ -23,6 +24,16 @@ public enum TipoArquivo {
 		this.valor = valor;
 	}
 
+	/**
+	 * Método que retorna um novo Enum do tipo especificado.
+	 *  
+	 * @author Felipe Jaconis
+	 * 
+	 * @param Tipo de arquivo desejado Vingadores ou Liga da Justiça
+	 * @retun TipoArquivo correspondente
+	 * @throws Caso não encontre um tipo espeficiado lança IllegalArgumentException
+	 *  
+	 */
 	public static TipoArquivo fromValue(String value) {
 		if (!StringUtils.isEmpty(value)) {
 			for (TipoArquivo el : TipoArquivo.values()) {

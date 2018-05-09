@@ -11,9 +11,8 @@
 	<link href="../../css/main.css" rel="stylesheet"></link>
 	<script type="text/javascript" src="../../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-	
-</head>
-<script>
+	<script  type="text/javascript" src="../../js/jquery.maskedinput.js"></script>
+	<script  type="text/javascript">
 	$(document).ready(function() {
 		$('#inNmJogador').on('input', function() {
 			var input=$(this);
@@ -29,8 +28,20 @@
 		});
 
 	});
-
-</script>	
+	
+	$(function() {
+		$.mask.definitions['~'] = "[+-]";
+		$("#inNrTelefone").mask("(99) 9 9999-9999");
+		$("#phoneAutoclearFalse").mask("(99) 9 9999-9999", { autoclear: false, completed:function(){alert("completed autoclear!");} });
+		$("#phoneExtAutoclearFalse").mask("(99) 9 9999-9999? x99999", { autoclear: false });
+		$("input").blur(function() {
+			$("#info").html("Unmasked value: " + $(this).mask());
+		}).dblclick(function() {
+			$(this).unmask();
+		});
+	});
+</script>
+</head>	
 <body>
 
 	<nav class="navbar navbar-inverse">
@@ -78,7 +89,7 @@
 						<div class="form-group row">
 							<div class="col-md-2">
 								<label>Número de Telefone</label> 
-								<input type="text"  id="inNrTelefone" name="inNrTelefone"class="form-control phone-mask"  th:field="*{nrTelefone}" placeholder="Ex: (xx) x xxxx-xxxx" />
+								<input type="text"  id="inNrTelefone" name="inNrTelefone" class="form-control phone-mask"  th:field="*{nrTelefone}" placeholder="Ex: (xx) x xxxx-xxxx" />
 							</div>
 						</div>
 						<div class="form-group row">
@@ -87,6 +98,7 @@
 								<div th:each="tipoArquivo : ${tipoArquivos}" > 
 								    <input type="radio" th:id="${{tipoArquivo}}" th:value="${{tipoArquivo}}" th:field="*{arquivoSelecionado}" required/>
 								    <label th:for="${tipoArquivo}" th:text="${tipoArquivo.valor}" ></label>
+								    
 								</div>
 								<span class="error_show" th:text="${message}">The error message</span>
 							</div>

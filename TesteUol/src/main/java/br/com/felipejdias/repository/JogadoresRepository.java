@@ -12,14 +12,17 @@ import br.com.felipejdias.domain.JogadoresEntity;
 import br.com.felipejdias.domain.TipoArquivo;
 
 /**
- * Classe {@link Repository} que extend a  JpaRepository que será implementada e executada pelo spring framework. 
+ * 
+ * Classe {@link Repository} que estende a JpaRepository que será implementada pelo spring framework.
+ * 
+ * O próprio framework se encarregará de criar uma implementação padrão dos métodos básicos de acesso ao dado como salvar, consulta por Id, listar todos e etc.
  * 
  *  
  * @author Felipe Jaconis
  * 
- * @see 
- * 
- * {@link JpaRepository}
+ * @see Repository
+ * @see JpaRepository
+ * @see Query
  * 
  */
 @Repository
@@ -33,9 +36,8 @@ public interface JogadoresRepository extends JpaRepository<JogadoresEntity, Long
 	 * 	@param {@link TipoArquivo} tipo de arquivo selecionado em tela pelo usuário, podendo ser Vingadores ou Liga da Justiça.
 	 * 	@return  List<{@link CodinomesDisponiveis}>
 	 * 
-	 *  @see 
+	 *  @see  org.springframework.data.jpa.repository.Query
 	 * 
-     * {@link org.springframework.data.jpa.repository.Query}
 	 * 
 	 */
 	@Query("SELECT new br.com.felipejdias.domain.CodinomesDisponiveis(c.cdCodinome, c.nmCodinome, c.cdGrupo) FROM CodinomesEntity c"

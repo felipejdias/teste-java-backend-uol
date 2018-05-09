@@ -24,14 +24,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
- * Entidade JPA que representa a tablea de jogadores
+ * Entidade JPA que representa a tablea de jogadores.
+ * 
+ * Esta tabela será criada automaticamente pelo framework do spring e os dados serão persistidos utilizando Repository do JPA.
  * 
  *  
  * @author Felipe Jaconis
  * 
- * @see 
- * 
- * {@link Entity}
  * 
  */
 @Entity
@@ -54,7 +53,7 @@ public class JogadoresEntity implements Serializable {
 	
 	@Column(name = "DS_EMAIL")
     @NotNull(message="Insera um e-mail váliado")
-    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Email address is invalid")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Endereço de e-mail inválido")
 	private String dsEmail;
 	
 	@Column(name = "NR_TELEFONE", nullable = true)
